@@ -42,6 +42,7 @@ body {
     color: var(--text-main);
     line-height: 1.6;
     overflow-x: hidden;
+    position: relative;
 }
 
 a {
@@ -54,6 +55,27 @@ img {
     max-width: 100%;
     height: auto;
     display: block;
+}
+
+/* =========================================
+   NUEVO: MARCA DE AGUA DE FONDO
+   ========================================= */
+.watermark-bg {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80vw;
+    height: 80vw;
+    max-width: 800px;
+    max-height: 800px;
+    background-image: url('assets/logo-roller-vibes.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    opacity: 0.03;
+    z-index: -1;
+    pointer-events: none;
 }
 
 /* =========================================
@@ -72,6 +94,20 @@ img {
     z-index: 1000;
     box-shadow: var(--shadow-sm);
     border-bottom: 3px solid var(--primary);
+}
+
+/* NUEVO: Logo en texto */
+.logo-text {
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--dark);
+    letter-spacing: -1px;
+    display: inline-block;
+}
+
+.logo-text .text-accent {
+    color: var(--primary);
+    font-weight: 900;
 }
 
 .logo-img {
@@ -1024,10 +1060,24 @@ img {
     text-align: left;
 }
 
+/* NUEVO: Logo en texto para footer */
+.logo-text-footer {
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--white);
+    display: block;
+    margin-bottom: 10px;
+}
+
+.logo-text-footer .text-accent {
+    color: var(--primary);
+    font-weight: 900;
+}
+
 .footer-logo-img {
     height: 60px;
     margin-bottom: 15px;
-    filter: brightness(0) invert(1); /* Hace el logo blanco si es oscuro */
+    filter: brightness(0) invert(1);
 }
 
 .footer-logo p {
@@ -1283,7 +1333,7 @@ img {
         bottom: 20px;
         right: 20px;
     }
-} /* <--- ¡ESTA LLAVE FALTABA! */
+}
 
 /* =========================================
    16. ESTILOS DEL FORMULARIO DE CONTACTO
