@@ -1426,3 +1426,54 @@ img {
     vertical-align: middle;
     display: inline-block;
 }
+
+/* =========================================
+   17. CORRECCIONES RESPONSIVE (MÓVIL)
+   ========================================= */
+
+/* CORRECCIÓN: Título del header en móvil */
+.logo {
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    gap: 8px;
+}
+
+.logo-text {
+    font-size: 20px;
+    white-space: nowrap;
+}
+
+.logo-icon {
+    height: 40px;
+    flex-shrink: 0;
+}
+
+/* CORRECCIÓN: Sección App en móvil */
+.app-container {
+    gap: 30px;
+}
+
+.app-image {
+    order: -1;
+    display: flex;
+    justify-content: center;
+}
+
+.app-placeholder {
+    width: 200px;
+    height: 360px;
+}
+
+.app-placeholder i {
+    font-size: 48px;
+}
+
+.app-placeholder p {
+    font-size: 16px;
+}
+
+.app-features {
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
