@@ -1409,3 +1409,21 @@ img {
     transform: none;
     box-shadow: none;
 }
+
+/* NUEVO: Logo junto al texto */
+.logo-icon {
+    height: 50px;
+    width: auto;
+    margin-right: 10px;
+    vertical-align: middle;
+    display: inline-block;
+}
+
+.logo-icon-footer {
+    height: 60px;
+    width: auto;
+    margin-right: 10px;
+    vertical-align: middle;
+    display: inline-block;
+    filter: brightness(0) invert(1); /* Lo hace blanco en footer oscuro */
+}
