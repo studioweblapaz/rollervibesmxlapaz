@@ -2,18 +2,16 @@
 // SERVICE WORKER - ROLLER VIBES MX LA PAZ
 // ==========================================
 
-const CACHE_NAME = 'roller-vibes-v1';
+const CACHE_NAME = 'roller-vibes-v2'; // Versión actualizada
 const urlsToCache = [
   './',
   './index.html',
   './style.css',
   './script.js',
-  './manifest.json',
-  'https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap',
-  'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css'
+  './manifest.json'
 ];
 
-// Instalar Service Worker y cachear archivos
+// 1. Instalar y cachear archivos estáticos
 self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE_NAME)
@@ -23,24 +21,35 @@ self.addEventListener('install', event => {
       })
       .catch(err => console.log('Error al cachear:', err))
   );
+  // Forzar la activación inmediata
+  self.skipWaiting();
 });
 
-// Interceptar peticiones y servir desde caché
+// 2. Interceptar peticiones (IGNORANDO FIREBASE)
 self.addEventListener('fetch', event => {
+  // Ignorar peticiones de Firebase, Google APIs y métodos que no sean GET
+  if (event.request.url.includes('googleapis.com') || 
+      event.request.url.includes('firebaseio.com') ||
+      event.request.url.includes('firestore.googleapis.com') ||
+      event.request.method !== 'GET') {
+    return; // Dejar que el navegador maneje estas peticiones normalmente
+  }
+
   event.respondWith(
     caches.match(event.request)
       .then(response => {
-        // Si existe en caché, devolverlo
         if (response) {
-          return response;
+          return response; // Servir desde caché si existe
         }
-        // Si no, hacer la petición normal
-        return fetch(event.request);
+        return fetch(event.request); // Si no, hacer la petición de red
+      })
+      .catch(() => {
+        // Fallback opcional si no hay red ni caché
       })
   );
 });
 
-// Activar Service Worker y limpiar cachés viejos
+// 3. Activar y limpiar cachés viejos
 self.addEventListener('activate', event => {
   event.waitUntil(
     caches.keys().then(cacheNames => {
@@ -54,4 +63,6 @@ self.addEventListener('activate', event => {
       );
     })
   );
+  // Tomar el control de todas las páginas inmediatamente
+  return self.clients.claim();
 });
