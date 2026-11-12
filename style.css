@@ -1425,5 +1425,4 @@ img {
     margin-right: 10px;
     vertical-align: middle;
     display: inline-block;
-    filter: brightness(0) invert(1); /* Lo hace blanco en footer oscuro */
 }
