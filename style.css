@@ -1477,3 +1477,10 @@ img {
     grid-template-columns: 1fr;
     gap: 20px;
 }
+.social-link.tiktok {
+    background: #000000;
+    color: var(--white);
+}
+.social-link.tiktok:hover {
+    background: #333333;
+}
